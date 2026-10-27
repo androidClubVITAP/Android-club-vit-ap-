@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@theme{--color-ink:#050805;--color-surface:#0B100D;--color-droid:#3DDC84;--color-neon:#00E676;--color-mute:#B7C2BA;--font-sans:Inter,system-ui,sans-serif}
+body{background:radial-gradient(60rem 36rem at 85% -10%,rgba(61,220,132,.13),transparent),#050805;color:#fff;font-family:var(--font-sans);overflow-x:hidden}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(61,220,132,.03));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 24px 50px -28px #000;border-radius:1.25rem}
+.in{width:100%;border-radius:.75rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);padding:.6rem .8rem;color:#fff}
+.in:focus{border-color:#3DDC84}select.in option{background:#0B100D}
+.btn-p,.btn-g,.btn-d{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;border-radius:999px;padding:.55rem 1.2rem;font-weight:600;font-size:.9rem;transition:.2s;min-height:2.5rem}
+.btn-p{background:#3DDC84;color:#050805}.btn-p:hover{background:#00E676}
+.btn-d{background:#ef4444;color:#fff}
+.btn-g{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05)}.btn-g:hover{background:rgba(255,255,255,.12)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.grid-bg{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 70%);-webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 70%)}
+:focus-visible{outline:2px solid #3DDC84;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Smooth scroll (Lenis) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+/* Glass cards glow around the pointer (--mx/--my are set by the Cursor component) */
+.glass{transition:border-color .5s,box-shadow .5s,transform .5s cubic-bezier(.22,1,.36,1),translate .5s cubic-bezier(.22,1,.36,1)}
+.glass:hover{border-color:rgba(61,220,132,.35);background-image:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(61,220,132,.17),transparent 65%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(61,220,132,.03))}
+#cur-glow,#cur-ring{position:fixed;top:0;left:0;pointer-events:none;border-radius:999px;opacity:0;transition:opacity .5s}
+#cur-glow{width:640px;height:640px;z-index:-1;background:radial-gradient(circle,rgba(61,220,132,.2),rgba(0,230,118,.06) 45%,transparent 68%)}
+#cur-ring{width:32px;height:32px;z-index:200;border:1.5px solid rgba(61,220,132,.8);transition:opacity .5s,background .25s}
+@keyframes page-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.page-in{animation:page-in .8s cubic-bezier(.22,1,.36,1)}

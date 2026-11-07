@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@theme{--color-ink:#050805;--color-surface:#0B100D;--color-droid:#3DDC84;--color-neon:#00E676;--color-mute:#B7C2BA;--font-sans:Inter,system-ui,sans-serif}
+body{background:radial-gradient(60rem 36rem at 85% -10%,rgba(61,220,132,.13),transparent),#050805;color:#fff;font-family:var(--font-sans);overflow-x:hidden}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(61,220,132,.03));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 24px 50px -28px #000;border-radius:1.25rem}
+.in{width:100%;border-radius:.75rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);padding:.6rem .8rem;color:#fff}
+.in:focus{border-color:#3DDC84}select.in option{background:#0B100D}
+.btn-p,.btn-g,.btn-d{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;border-radius:999px;padding:.55rem 1.2rem;font-weight:600;font-size:.9rem;transition:.2s;min-height:2.5rem}
+.btn-p{background:#3DDC84;color:#050805}.btn-p:hover{background:#00E676}
+.btn-d{background:#ef4444;color:#fff}
+.btn-g{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05)}.btn-g:hover{background:rgba(255,255,255,.12)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.grid-bg{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 70%);-webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 70%)}
+:focus-visible{outline:2px solid #3DDC84;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Smooth scroll (Lenis) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+/* Glass cards glow around the pointer (--mx/--my are set by the Cursor component) */
+.glass{transition:border-color .5s,box-shadow .5s,transform .5s cubic-bezier(.22,1,.36,1),translate .5s cubic-bezier(.22,1,.36,1)}
+.glass:hover{border-color:rgba(61,220,132,.35);background-image:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(61,220,132,.17),transparent 65%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(61,220,132,.03))}
+@keyframes page-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.page-in{animation:page-in .8s cubic-bezier(.22,1,.36,1)}
+
+/* Cursor glow (no ring) */
+#cur-glow{position:fixed;top:0;left:0;pointer-events:none;border-radius:999px;opacity:0;transition:opacity .5s;width:640px;height:640px;z-index:-1;background:radial-gradient(circle,rgba(61,220,132,.2),rgba(0,230,118,.06) 45%,transparent 68%)}
+/* Full-site grid with logo tiles that glow near the pointer (--g is set per tile from JS) */
+@property --g{syntax:'<number>';inherits:true;initial-value:0}
+#grid-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.grid-base,.grid-hot{position:absolute;inset:0;background-size:48px 48px}
+.grid-base{background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px)}
+.grid-hot{background-image:linear-gradient(rgba(61,220,132,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(61,220,132,.5) 1px,transparent 1px);-webkit-mask-image:radial-gradient(260px circle at var(--cx,-999px) var(--cy,-999px),#000,transparent);mask-image:radial-gradient(260px circle at var(--cx,-999px) var(--cy,-999px),#000,transparent)}
+.bg-logo{position:absolute;display:grid;place-items:center;border:1px solid rgba(61,220,132,calc(.07 + var(--g)*.55));border-radius:.75rem;background:rgba(61,220,132,calc(var(--g)*.1));box-shadow:0 0 calc(var(--g)*34px) rgba(61,220,132,calc(var(--g)*.4));transition:--g .45s ease-out}
+.bg-logo>span{grid-area:1/1;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+.lg-dim{background:#fff;opacity:calc(.17*(1 - var(--g)))}
+.lg-hot{background:#3DDC84;opacity:var(--g);filter:drop-shadow(0 0 calc(var(--g)*14px) #3DDC84)}
+/* Fluid title: coloured blobs drift inside the letter shapes */
+.fl{transform-box:fill-box;transform-origin:center}
+.d1{animation:d1 13s ease-in-out infinite alternate}.d2{animation:d2 16s ease-in-out infinite alternate}.d3{animation:d3 11s ease-in-out infinite alternate}.d4{animation:d4 18s ease-in-out infinite alternate}.d5{animation:d5 14s ease-in-out infinite alternate}.d6{animation:d6 12s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(640px,150px) scale(1.25)}}@keyframes d2{to{transform:translate(-420px,-120px) scale(.8)}}@keyframes d3{to{transform:translate(-560px,190px) scale(1.3)}}@keyframes d4{to{transform:translate(480px,-170px) scale(1.2)}}@keyframes d5{to{transform:translate(-640px,-150px) scale(.85)}}@keyframes d6{to{transform:translate(700px,-60px) scale(1.4)}}
+.sweep{animation:sweep 6s ease-in-out infinite}@keyframes sweep{0%{transform:translateX(0)}65%,100%{transform:translateX(1500px)}}
+.fpaused .fl,.fpaused .sweep{animation-play-state:paused}

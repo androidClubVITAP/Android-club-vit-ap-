@@ -73,7 +73,7 @@ The built-in Supabase email sender is rate-limited and only delivers to project 
 ### 5. Configure the frontend
 
 ```bash
-cp .env.example .env.local
+copy .env.example .env.local
 ```
 
 Fill in:
